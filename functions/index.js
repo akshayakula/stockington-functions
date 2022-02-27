@@ -113,25 +113,25 @@ exports.sec = functions.https.onRequest((req,res) => {
             getData(response.data.filings[0].linkToFilingDetails)
             .then(result => {
                 ////RUN OPEN AI API
-                let prompt = `Summarize this report from ${company_name} for an investor:\n`
+                let prompt = `Tell Me about ${company_name} for an investor:\n`
                 const headers = {
                     "Authorization": `Bearer ${keys.OpenAI}`
                 }
                 const body1 = {
                     "prompt": `${prompt}\n${result[0]}\n\nTl;dr`,
-                    "max_tokens": 200
+                    "max_tokens": 300
                 }
                 axios.post(openai_url,body1,{headers})
                 .then(response1 => {
                     const body2 = {
-                        "prompt": `${prompt}\n${result[1]}\n\nTl;dr`,
-                        "max_tokens": 200
+                        "prompt": `Summarize the report ${company_name} for an investor\n${result[1]}\n\nTl;dr`,
+                        "max_tokens": 300
                     }
                     axios.post(openai_url,body2,{headers})
                     .then(response2 => {
                         const body3 = {
-                            "prompt": `${prompt}\n${result[2]}\n\nTl;dr`,
-                            "max_tokens": 200
+                            "prompt": `Summarize the report ${company_name} for an investor\n${result[2]}\n\nTl;dr`,
+                            "max_tokens": 300
                         }
                         axios.post(openai_url,body3,{headers})
                         .then(response3 => {
