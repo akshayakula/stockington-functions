@@ -137,6 +137,7 @@ exports.sec = functions.https.onRequest((req,res) => {
                         axios.post(openai_url,body3,{headers})
                         .then(response3 => {
                             console.log("DONE")
+                            console.log(`${response1.data.choices[0].text}${response2.data.choices[0].text}${response3.data.choices[0].text}`)
                             res.send(`${response1.data.choices[0].text}${response2.data.choices[0].text}${response3.data.choices[0].text}`)
                         })
                         .catch(err =>{
